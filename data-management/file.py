@@ -187,3 +187,81 @@ print(data)
 # stage 5
 # Additional function
 
+
+def check_availability(title):
+    for book in books:
+        if book["title"] == title and book["borrower"] is None:
+            return True
+    return False
+
+# Function to borrow a book and update its status and borrower information
+def borrow_book(title, borrower):
+    for book in books:
+        if book["title"] == title and book["borrower"] is None:
+            book["borrower"] = borrower
+            return True
+    return False
+
+# Function to return a book and update its status and borrower information
+def return_book(title):
+    for book in books:
+        if book["title"] == title and book["borrower"] is not None:
+            book["borrower"] = None
+            return True
+    return False
+
+# Function to generate a report of books by genre
+def generate_report_by_genre():
+    genres = {}
+    for book in books:
+        genre = book["genre"]
+        if genre in genres:
+            genres[genre] += 1
+        else:
+            genres[genre] = 1
+    
+    print("Number of books by genre:")
+    for genre, count in genres.items():
+        print("- {}: {}".format(genre, count))
+
+# Function to generate a report of available books
+def generate_available_books_report():
+    available_books = [book["title"] for book in books if book["borrower"] is None]
+    print("Available books:")
+    for title in available_books:
+        print("- {}".format(title))
+
+# Sample usage of the functions
+print("Available books before borrowing:")
+generate_available_books_report()
+
+
+
+users = []
+
+# Function to create a new user account
+def create_user(name, address, email, password):
+    user = {"name": name, "address": address, "email": email, "password": password}
+    users.append(user)
+
+# Function to update user information
+def update_user_info(email, new_info):
+    for user in users:
+        if user["email"] == email:
+            user.update(new_info)
+            break
+
+# Function to handle user authentication
+def authenticate_user(email, password):
+    for user in users:
+        if user["email"] == email and user["password"] == password:
+            return True
+    return False
+
+# Function to reset a user's password
+def reset_password(email, new_password):
+    for user in users:
+        if user["email"] == email:
+            user["password"] = new_password
+            break
+        
