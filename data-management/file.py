@@ -96,6 +96,25 @@ def show_filtered_books():
             print('{:<30s} {:<25s} {:<20s} {:<15s}'.format(book['title'], book['author'], book['genre'], book['isbn']))
     print("-" * 70)
 
+def search_book():
+    search = input("Enter a search keyword eg (title, author, genre, ISBN, etc.): ")
+    keyword = input("Enter the {} of the book you want to seach : ".format(search))
+    matching_books = []
+    for book in books:
+        if keyword.lower() in book['title'].lower() or keyword.lower() in book['author'].lower() or keyword.lower() in book['genre'].lower() or keyword.lower() in book['isbn'].lower():
+            matching_books.append(book)
+    if len(matching_books) > 0:
+        print("Found matching books:")
+        print("-" * 70)
+        print('{:<30s} {:<25s} {:<20s} {:<15s}'.format("Title", "Author", "Genre", "ISBN"))
+        print("-" * 90)
+        for book in matching_books:
+            print('{:<30s} {:<25s} {:<20s} {:<15s}'.format(book['title'], book['author'], book['genre'], book['isbn']))
+        print("-" * 90)
+    else:
+        print("No books found for the entered keyword")
+
+
 # Adding sample books to the list for testing
 books.append(dict_1)
 books.append(dict_2)
@@ -109,8 +128,9 @@ while True:
     print("3. Delete an existing book")
     print("4. View all books")
     print("5. Filter books by criteria")
-    print("6. Exit")
-    choice = input("\nEnter your choice (1-6): ")
+    print("6. search book")
+    print("7. Exsit")
+    choice = input("\nEnter your choice (1-7): ")
 
     if choice == '1':
         add_book()
@@ -123,6 +143,8 @@ while True:
     elif choice == '5':
         show_filtered_books()
     elif choice == '6':
+        search_book()
+    elif choice == '7':    
         break
     else:
         print("Invalid choice. Try again.")
@@ -131,21 +153,4 @@ print("Thank you for using the book management system!")
 
 #stage 2 
 
-def search_book():
-    search = int(input("Enter a search keyword eg (title, author, genre, ISBN, etc.): "))
-    keyword = input("Enter the search keyword: ")
-    matching_books = []
-    for book in books:
-        if keyword.lower() in book['title'].lower() or keyword.lower() in book['author'].lower() or keyword.lower() in book['genre'].lower() or keyword.lower() in book['isbn'].lower():
-            matching_books.append(book)
-    if len(matching_books) > 0:
-        print("Found matching books:")
-        print("-" * 70)
-        print('{:<30s} {:<25s} {:<20s} {:<15s}'.format("Title", "Author", "Genre", "ISBN"))
-        print("-" * 70)
-        for book in matching_books:
-            print('{:<30s} {:<25s} {:<20s} {:<15s}'.format(book['title'], book['author'], book['genre'], book['isbn']))
-        print("-" * 70)
-    else:
-        print("No books found for the entered keyword")
 
