@@ -114,6 +114,7 @@ def search_book():
     else:
         print("No books found for the entered keyword")
 
+# stage 3
 
 # Adding sample books to the list for testing
 books.append(dict_1)
@@ -151,6 +152,38 @@ while True:
 
 print("Thank you for using the book management system!")
 
-#stage 2 
+#stage 4
 
+# File Handling
+
+import json
+
+def save_book(books, filename):
+    # converting dictionaly to JSON file strings
+    json_data = json.dumps(books)
+
+    # write the json sting to a file
+    with open(filename, "w") as file:
+        file.write(json_data)
+
+
+save_book(books, "books.json")
+
+
+def load_books(filename):
+    # reade json file
+    with open(filename, "r") as file:
+        json_data = file.read()
+    # convert JSON string to list of dictionary
+    data = json.loads(json_data)
+    return data
+
+
+# load book and populate the table
+
+data = load_books("books.json")
+print(data)
+
+# stage 5
+# Additional function
 
